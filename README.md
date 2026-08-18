@@ -11,7 +11,7 @@
 
 CPU TSDF fusion and marching cubes surface extraction in pure Swift. No
 ARKit meshing, no RealityKit, no third-party dependencies -- the
-reconstruction math itself, extracted from [Vista](https://github.com/stevyf93II),
+reconstruction math itself, extracted from [Vista](https://github.com/stevyf93II/vista),
 my iOS 3D room-scanning app, where it turns LiDAR depth frames into
 watertight colored meshes.
 
