@@ -233,21 +233,28 @@ public final class TSDFVolume {
                         let w = Float(conf)
                         let vIdx = (z * dim + y) * dim + x
                         var vox = vbuf[vIdx]
-                        var wNew = vox.weight + w
-                        if wNew > maxWeight { wNew = maxWeight }
 
-                        vox.tsdf = (vox.tsdf * vox.weight + tsdfNew * w) / wNew
+                        // True running average: divide by the UNCAPPED weight
+                        // sum, then cap the stored weight (standard
+                        // KinectFusion update). Dividing by the capped weight
+                        // instead makes tsdf drift past +/-1 once the cap is
+                        // reached: +tsdfNew*w/maxWeight per frame, unbounded.
+                        // Caught by testWeightCapAndTSDFRange at tsdf = 2.5
+                        // after 80 identical conf-2 frames.
+                        let wSum = vox.weight + w
 
-                        // Running-average color.
-                        let rNew = (Float(vox.color.x) * vox.weight + Float(r8) * w) / wNew
-                        let gNew = (Float(vox.color.y) * vox.weight + Float(g8) * w) / wNew
-                        let bNew = (Float(vox.color.z) * vox.weight + Float(b8) * w) / wNew
+                        vox.tsdf = (vox.tsdf * vox.weight + tsdfNew * w) / wSum
+
+                        // Running-average color, same denominator.
+                        let rNew = (Float(vox.color.x) * vox.weight + Float(r8) * w) / wSum
+                        let gNew = (Float(vox.color.y) * vox.weight + Float(g8) * w) / wSum
+                        let bNew = (Float(vox.color.z) * vox.weight + Float(b8) * w) / wSum
                         vox.color = SIMD3<UInt8>(
                             UInt8(min(255, max(0, rNew))),
                             UInt8(min(255, max(0, gNew))),
                             UInt8(min(255, max(0, bNew)))
                         )
-                        vox.weight = wNew
+                        vox.weight = wSum > maxWeight ? maxWeight : wSum
 
                         vbuf[vIdx] = vox
                         nUpdates += 1
