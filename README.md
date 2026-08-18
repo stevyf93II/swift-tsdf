@@ -2,9 +2,9 @@
 
 [![CI](https://github.com/stevyf93II/swift-tsdf/actions/workflows/ci.yml/badge.svg)](https://github.com/stevyf93II/swift-tsdf/actions/workflows/ci.yml)
 
-![Reconstructed scan from Vista](docs/hero.jpg)
+![Reconstructed scan from Vista](docs/hero.png)
 
-*A real room captured with Vista on iPhone LiDAR — fused by `TSDFVolume`, surfaced by `MarchingCubes`, rendered in Vista's viewer.*
+*A real room captured with Vista on iPhone LiDAR — fused by `TSDFVolume`, surfaced by `MarchingCubes`, exported as GLB.*
 
 CPU TSDF fusion and marching cubes surface extraction in pure Swift. No
 ARKit meshing, no RealityKit, no third-party dependencies -- the
