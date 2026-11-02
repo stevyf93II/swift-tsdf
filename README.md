@@ -125,6 +125,10 @@ try PLYBinaryExporter.writeMesh(
 - Vertex welding pass on the marching cubes output
 - Space carving for observed-empty regions
 
+## More from the same author
+
+[Vista](https://github.com/stevyf93II/vista): iOS LiDAR room scanner · [feedmerge](https://github.com/stevyf93II/feedmerge): vendor feed to versioned JSON catalog · [catalog-mcp](https://github.com/stevyf93II/catalog-mcp): MCP server for any JSON catalog · [docdrop](https://github.com/stevyf93II/docdrop): append-only Google Docs for AI memory · [fal-image-relay](https://github.com/stevyf93II/fal-image-relay): your own fal.ai image endpoint
+
 ## License
 
 MIT
